@@ -51,8 +51,10 @@ public class SocketIoEventService {
   public ConnectListener onConnected() {
     return client -> {
       String room = client.getHandshakeData().getSingleUrlParam(roomParamName);
-      if (!rooms.contains(room)) {
-        throw new RuntimeException("Room credentials not met");
+      try {
+        ROOM roomEnum = ROOM.valueOf(room);
+      } catch (Exception e) {
+        throw new RuntimeException("Room requirements not met");
       }
       client.joinRoom(room);
       log.info("Client connected. SessionId:{}", client.getSessionId());
