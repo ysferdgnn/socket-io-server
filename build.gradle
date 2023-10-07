@@ -40,7 +40,7 @@ tasks.named('bootJar') {     launchScript() }
 jar {
     manifest {
         attributes(
-                'Main-Class': 'com/yusuf/socketioserver/SocketIoServerApplication.java'
+                'Main-Class': 'com.yusuf.socketioserver.SocketIoServerApplication.java'
         )
     }
 }
