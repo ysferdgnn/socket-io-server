@@ -22,16 +22,17 @@ public class UserInfoScheduler {
     this.socketIOServer = socketIOServer;
   }
 
-  @Scheduled(fixedRate = 5000)
+  @Scheduled(fixedRate = 1000)
   public void sendUserDataAllClients() {
     clients.forEach(
-        s -> {
+        client -> {
           socketIOServer
-              .getRoomOperations(s.room())
+              .getRoomOperations(client.room())
               .sendEvent(
                   "user",
                   clients.stream()
                       .filter(user -> user.type() == UserType.MESSAGE)
+                          .filter(user -> user.room().contentEquals(client.room()))
                       .map(User::username)
                       .collect(Collectors.toList()));
         });

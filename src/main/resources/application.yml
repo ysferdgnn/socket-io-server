@@ -8,6 +8,6 @@ logging:
 
 socket:
   host: localhost
-  port: 8081
+  port: 8080
   event: chat
 
